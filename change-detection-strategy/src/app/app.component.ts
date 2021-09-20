@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
       <h1>This is the parent component</h1>
       <button
         (click)="onClick()"
-      >Click Me</button>
+      >Click Me (Part of Parent Component)</button>
       <first-child></first-child>
+      <second-child></second-child>
     </div>
   `,
   styles: [`
@@ -24,6 +25,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log(`${this.componentName} ran ngOnInit`)
+  }
+
+  ngDoCheck(): void {
+    console.log(`${this.componentName} checked for changes`)
   }
 
   onClick() {
