@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Person } from './person'
 import { peopleArray } from './people-data';
 @Component({
@@ -9,6 +9,8 @@ import { peopleArray } from './people-data';
       <button
         (click)="onClick()"
       >{{ this.buttonText }}</button>
+      <button
+      (click)="noChangeClick()">{{this.noChangeBtn}}</button>
       <first-child [person]="person"></first-child>
       <second-child></second-child>
     </div>
@@ -47,7 +49,8 @@ export class AppComponent implements OnInit {
   title = 'change-detection-strategy';
   componentName: string = "Parent Component";
   buttonText: string = "Click to change Person data on Parent level";
-  i = 0;
+  noChangeBtn: string = "No Change";
+  i: number = 0;
 
   person: Person = {
     firstName: "Clare",
@@ -72,6 +75,9 @@ export class AppComponent implements OnInit {
     =======================================
     `)
 
+    // ** Uncomment to demo how OnPush won't render mutations to existing references:
+    // this.person.firstName = "Melody"
+
     if (this.i >= peopleArray.length) {
       this.i = 0;
       this.person = peopleArray[this.i]
@@ -80,5 +86,14 @@ export class AppComponent implements OnInit {
     }
 
     this.i++
+  }
+
+  noChangeClick() {
+    console.log(`
+    =======================================
+    ${this.componentName} changed some data.
+    =======================================
+    `)
+    this.noChangeBtn = "should not have changed child"
   }
 }

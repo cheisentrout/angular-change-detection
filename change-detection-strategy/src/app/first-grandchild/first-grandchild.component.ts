@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'first-grandchild',
@@ -27,7 +27,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FirstGrandchildComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef) { }
 
   componentName: string = "First Grandchild";
 
@@ -36,6 +36,7 @@ export class FirstGrandchildComponent implements OnInit {
   }
 
   ngDoCheck(): void {
+    this.ref.detectChanges()
     console.log(`${this.componentName} ran change detection.`)
   }
 

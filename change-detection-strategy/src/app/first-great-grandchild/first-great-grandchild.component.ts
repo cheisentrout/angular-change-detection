@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'first-great-grandchild',
@@ -39,7 +39,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FirstGreatGrandchildComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   componentName: string = "First Great-Grandchild"
   buttonText: string = "Trigger change on first great-grandchild."
@@ -59,6 +59,7 @@ export class FirstGreatGrandchildComponent implements OnInit {
     ${this.componentName} changed some data
     =======================================
     `)
+    // this.cdr.markForCheck()
   }
 
 }
