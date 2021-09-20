@@ -6,6 +6,7 @@ import { FirstChildComponent } from './first-child/first-child.component';
 import { SecondChildComponent } from './second-child/second-child.component';
 import { FirstGrandchildComponent } from './first-grandchild/first-grandchild.component';
 import { SecondGrandchildComponent } from './second-grandchild/second-grandchild.component';
+import { FirstGreatGrandchildComponent } from './first-great-grandchild/first-great-grandchild.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { SecondGrandchildComponent } from './second-grandchild/second-grandchild
     FirstChildComponent,
     SecondChildComponent,
     FirstGrandchildComponent,
-    SecondGrandchildComponent
+    SecondGrandchildComponent,
+    FirstGreatGrandchildComponent
   ],
   imports: [
     BrowserModule

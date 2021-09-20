@@ -3,17 +3,26 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'second-child',
   template: `
+  <div>
     <h3>Second child</h3>
     <second-grandchild></second-grandchild>
+    </div>
   `,
   styles: [`
     * {
       font-family: 'roboto';
       letter-spacing: .5px;
+      background: #BF573F;
+      border-radius: 25px;
     }
-    
+
+    div {
+      padding: 10px;
+      margin: 10px 0;
+    }
+
     h3 {
-      color: blue;
+      color: whitesmoke;
     }
   `]
 })
@@ -28,7 +37,7 @@ export class SecondChildComponent implements OnInit {
   }
 
   ngDoCheck(): void {
-    console.log(`${this.componentName} checked for changes`)
+    console.log(`${this.componentName} ran change detection.`)
   }
 
 }

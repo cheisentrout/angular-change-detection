@@ -1,21 +1,36 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { Person } from '../person';
 
 @Component({
   selector: 'first-child',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h3>Child Component</h3>
+  <div>
+    <h3>First Child</h3>
+    <ol>
+      <li>{{person?.firstName}}</li>
+      <li>{{person?.lastName}}</li>
+      <li>{{person?.age}}</li>
+    </ol>
     <first-grandchild></first-grandchild>
+</div>
   `,
   styles: [`
     * {
       font-family: 'roboto';
       letter-spacing: .5px;
+      background: #D98F4E;
+      border-radius: 25px;
+    }
+
+    div {
+      padding: 10px;
+      margin: 10px 0;
     }
 
     h3 {
-      color: purple;
+      color: whitesmoke;
     }
   `]
 })
@@ -24,6 +39,7 @@ export class FirstChildComponent implements OnInit {
   constructor(public appComponent: AppComponent) { }
 
   @Input()
+  person: Person | undefined;
 
   componentName: string = "First Child"
 
@@ -32,7 +48,7 @@ export class FirstChildComponent implements OnInit {
   }
 
   ngDoCheck(): void {
-    console.log(`${this.componentName} checked for changes`)
+    console.log(`${this.componentName} ran change detection.`)
   }
 
 }

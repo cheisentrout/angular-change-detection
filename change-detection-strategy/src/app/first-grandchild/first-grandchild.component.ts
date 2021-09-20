@@ -3,18 +3,25 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'first-grandchild',
   template: `
+  <div>
     <h4>First Grandchild</h4>
+  <first-great-grandchild></first-great-grandchild>
+    </div>
   `,
   styles: [`
     * {
       font-family: 'roboto';
       letter-spacing: .5px;
+      border-radius: 25px;
+    }
+
+    div {
+      background: #87A5A5;
+      padding: 10px;
     }
 
     h4 {
       color: white;
-      background: lightblue;
-      padding: 5px;
     }
   `]
 })
@@ -29,7 +36,7 @@ export class FirstGrandchildComponent implements OnInit {
   }
 
   ngDoCheck(): void {
-    console.log(`${this.componentName} checked for changes`)
+    console.log(`${this.componentName} ran change detection.`)
   }
 
 }
