@@ -7,11 +7,12 @@ import { peopleArray } from './people-data';
     <div>
       <h1>Parent Component</h1>
       <button
-        (click)="onClick()"
+        (click)="changePerson()"
       >{{ this.buttonText }}</button>
       <button
-      (click)="noChangeClick()">{{this.noChangeBtn}}</button>
-      <first-child [person]="person"></first-child>
+        (click)="changeNum()"
+      >Change Number</button>
+      <first-child [person]="person" [randomNum]="randomNum"></first-child>
       <second-child></second-child>
     </div>
   `,
@@ -38,6 +39,7 @@ import { peopleArray } from './people-data';
       padding: 5px;
       font-weight: bold;
       transition: .3s;
+      margin-right: 15px;
     }
 
     button:hover {
@@ -58,25 +60,32 @@ export class AppComponent implements OnInit {
     age: 30
   }
 
+  randomNum: number = 45;
+
   ngOnInit() {
     console.log(`${this.componentName} ran ngOnInit`)
   }
 
+  /** ngDoCheck() is a lifecycle hook that allows for custom change detection to be implemented.
+   * We are using it in this demo mostly to get console.log statements whenever change detection reaches
+   * a component.
+   * But if we add ChangeDetectorRef.detectChanges() somewhere within the DoCheck hook, we can force
+   * detection downstream.
+   * DoCheck is a very "expensive" hook.
+   */
   ngDoCheck(): void {
     console.log(`${this.componentName} checked for changes`)
   }
 
-  onClick() {
-    this.buttonText = "Person data changed."
-
+  changePerson() {
     console.log(`
     =======================================
     ${this.componentName} changed some data.
     =======================================
     `)
 
-    // ** Uncomment to demo how OnPush won't render mutations to existing references:
-    // this.person.firstName = "Melody"
+    // ** Uncomment to demo how OnPush won't render mutations to existing reference types:
+    //this.person.firstName = "Melody"
 
     if (this.i >= peopleArray.length) {
       this.i = 0;
@@ -88,12 +97,13 @@ export class AppComponent implements OnInit {
     this.i++
   }
 
-  noChangeClick() {
+  // Demonstrate how value types can be mutated and trigger change:
+  changeNum() {
     console.log(`
     =======================================
     ${this.componentName} changed some data.
     =======================================
     `)
-    this.noChangeBtn = "should not have changed child"
+    this.randomNum = 77;
   }
 }

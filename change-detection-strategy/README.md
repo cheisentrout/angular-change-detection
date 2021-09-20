@@ -1,27 +1,63 @@
-# ChangeDetectionStrategy
+###Angular’s Change Detection Strategy
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
+Basics of Change Detection
 
-## Development server
+Angular tracks when a component’s data changes, and updates the UI based on the changed data.
+Change detection is the mechanism for syncing a component’s template with a component’s data.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+DEMO: Parent-level data change
+All components are re-rendered, even though the data only affects the Input in first-child
+All descendants of first-child are also re-rendered, regardless of it’s Change Detection Strategy -- changes are passed down the tree when they are relevant
+Important to note that the Input data points to a new object reference. If the onClick function instead only mutates data in the existing person Object, the change is not reflected in the DOM.
+Demonstrate hard coded change to object (reference type)
+Demonstrate hard coded change to number (value type)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Change Detection Strategy
 
-## Running end-to-end tests
+Angular’s Change Detection Strategy is an enum with two members: OnPush(0) and Default(1).
+The Default change detection method continuously detects changes throughout the app, and re-renders the UI every time a change in data occurs.
+This can become a performance issue in a large app, in which a superfluous event in a lower-level component could cause an entire app to re-render.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+DEMO: First Great-Grandchild change
+An event occurs at the lowest possible (great-grandchild) level, and change detection begins all the way up at the parent level
+Every single component in the tree runs change detection
+Comment OnPush in on first-child, demo again
+
+
+
+OnPush Change Detection
+
+Using the OnPush Change Detection Strategy basically protects a piece of the component tree from re-rendering unnecessarily.
+This can improve performance for an app.
+OnPush is inherited by all child components and cannot be overridden.
+You can still explicitly invoke change detection on a child component of the OnPush CDS.
+
+
+DEMO: OnPush Strategy
+An event that occurs in the second-grandchild triggers change detection at the parent level, but then as it travels down the tree, it never reaches the first grandchild, or great-grandchild.
+The OnPush Strategy in the first-child component blocks them from re-rendering.
+We’re only getting the message from the first-child in this case because I’m using the DoCheck hook.
+
+
+
+What I’ve yet to learn…
+
+Can you use explicit change detection to skip over a parent component with OnPush?
+Using ChangeDetectorRef for this
+How Change Detection listens to and is affected by Observables.
+In the Demo, I’d like to be able to trigger the event in the second-grandchild and have the first-great-grandchild detect the changes made there, despite it being descended of the first-child with OnPush.
+
+
+References
+
+How Does Angular 2 Change Detection Really Work?
+OnPush Change Detection - How It Works
+The Last Guide to Angular Change Detection You Will Ever Need

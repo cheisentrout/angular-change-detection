@@ -3,9 +3,9 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 @Component({
   selector: 'first-grandchild',
   template: `
-  <div>
-    <h4>First Grandchild</h4>
-  <first-great-grandchild></first-great-grandchild>
+    <div>
+      <h4>First Grandchild</h4>
+      <first-great-grandchild></first-great-grandchild>
     </div>
   `,
   styles: [`
@@ -36,8 +36,15 @@ export class FirstGrandchildComponent implements OnInit {
   }
 
   ngDoCheck(): void {
-    this.ref.detectChanges()
+    // this.ref.detectChanges()
     console.log(`${this.componentName} ran change detection.`)
+  }
+
+  ngOnChanges() {
+    console.log(`
+          ********
+    ${this.componentName} fired onChanges
+          ********`)
   }
 
 }

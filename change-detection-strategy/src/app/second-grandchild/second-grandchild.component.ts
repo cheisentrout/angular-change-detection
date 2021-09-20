@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
     <h4>Second Grandchild</h4>
     <p>{{ this.displayMessage }}</p>
     <button
-      (click)="onChange()"
-    >Trigger Event on Second Grandchild</button>
+      (click)="onClick()"
+    >Trigger event on second grandchild</button><br>
   </div>
   `,
   styles: [`
@@ -56,7 +56,14 @@ export class SecondGrandchildComponent implements OnInit {
     console.log(`${this.componentName} ran change detection.`)
   }
 
-  onChange() {
+  ngOnChanges() {
+    console.log(`
+          ********
+    ${this.componentName} fired onChanges
+          ********`)
+  }
+
+  onClick() {
     const ogMessage: string = "This is our starting text. But if you click the button..."
     const changedMessage: string = "...this message was changed by the click event!"
     if (this.displayMessage !== changedMessage) {

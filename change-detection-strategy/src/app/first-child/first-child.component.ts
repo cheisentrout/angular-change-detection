@@ -1,20 +1,23 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { Person } from '../person';
 
 @Component({
   selector: 'first-child',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-  <div>
-    <h3>First Child</h3>
-    <ol>
-      <li>{{person?.firstName}}</li>
-      <li>{{person?.lastName}}</li>
-      <li>{{person?.age}}</li>
-    </ol>
-    <first-grandchild></first-grandchild>
-</div>
+    <div>
+      <h3>First Child</h3>
+      <p>Person data:</p>
+      <ol>
+        <li>{{person?.firstName}}</li>
+        <li>{{person?.lastName}}</li>
+        <li>{{person?.age}}</li>
+      </ol>
+      <p>Number data:</p>
+      <p>{{randomNum}}</p>
+      <first-grandchild></first-grandchild>
+    </div>
   `,
   styles: [`
     * {
@@ -29,6 +32,11 @@ import { Person } from '../person';
       margin: 10px 0;
     }
 
+    p {
+      font-weight: bold;
+      color: whitesmoke;
+    }
+
     h3 {
       color: whitesmoke;
     }
@@ -36,10 +44,13 @@ import { Person } from '../person';
 })
 export class FirstChildComponent implements OnInit {
 
-  constructor(public appComponent: AppComponent) { }
+  constructor(public appComponent: AppComponent, private cdr: ChangeDetectorRef) { }
 
   @Input()
   person: Person | undefined;
+
+  @Input()
+  randomNum?: number;
 
   componentName: string = "First Child"
 
@@ -48,7 +59,14 @@ export class FirstChildComponent implements OnInit {
   }
 
   ngDoCheck(): void {
+    // this.cdr.detectChanges()
     console.log(`${this.componentName} ran change detection.`)
   }
 
+  ngOnChanges() {
+    console.log(`
+          ********
+    ${this.componentName} fired onChanges()
+          ********`)
+  }
 }

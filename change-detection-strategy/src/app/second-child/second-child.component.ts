@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'second-child',
   template: `
-  <div>
-    <h3>Second child</h3>
-    <second-grandchild></second-grandchild>
+    <div>
+      <h3>Second child</h3>
+      <second-grandchild></second-grandchild>
     </div>
   `,
   styles: [`
@@ -38,6 +38,13 @@ export class SecondChildComponent implements OnInit {
 
   ngDoCheck(): void {
     console.log(`${this.componentName} ran change detection.`)
+  }
+
+  ngOnChanges() {
+    console.log(`
+          ********
+    ${this.componentName} fired onChanges
+          ********`)
   }
 
 }

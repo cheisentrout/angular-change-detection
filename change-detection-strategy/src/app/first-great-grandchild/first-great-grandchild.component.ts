@@ -6,8 +6,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
     <div>
       <h4>{{this.componentName}}</h4>
       <button
-      (click)="onChange()">{{this.buttonText}}</button>
-</div>
+      (click)="onClick()">{{this.buttonText}}</button>
+    </div>
   `,
   styles: [`
   * {
@@ -39,27 +39,32 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 })
 export class FirstGreatGrandchildComponent implements OnInit {
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor() { }
 
   componentName: string = "First Great-Grandchild"
-  buttonText: string = "Trigger change on first great-grandchild."
+  buttonText: string = "Trigger event from first great-grandchild."
 
   ngOnInit(): void {
-
+    console.log(`${this.componentName} triggered ngOnInit.`)
   }
 
   ngDoCheck(): void {
     console.log(`${this.componentName} ran change detection.`)
   }
 
-  onChange() {
+  ngOnChanges() {
+    console.log(`
+          ********
+    ${this.componentName} fired onChanges
+          ********`)
+  }
+
+  onClick() {
     this.buttonText = "Change was triggered."
     console.log(`
     =======================================
     ${this.componentName} changed some data
     =======================================
     `)
-    // this.cdr.markForCheck()
   }
-
 }
