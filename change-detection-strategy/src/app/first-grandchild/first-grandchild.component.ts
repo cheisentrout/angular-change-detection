@@ -6,9 +6,15 @@ import { Component, OnInit } from '@angular/core';
     <h4>First Grandchild</h4>
   `,
   styles: [`
+    * {
+      font-family: 'roboto';
+      letter-spacing: .5px;
+    }
+
     h4 {
       color: white;
       background: lightblue;
+      padding: 5px;
     }
   `]
 })

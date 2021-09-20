@@ -7,12 +7,17 @@ import { Component, OnInit } from '@angular/core';
       <h1>This is the parent component</h1>
       <button
         (click)="onClick()"
-      >Click Me (Part of Parent Component)</button>
+      >{{ this.buttonText }}</button>
       <first-child></first-child>
       <second-child></second-child>
     </div>
   `,
   styles: [`
+    * {
+      font-family: 'roboto';
+      letter-spacing: .5px;
+    }
+
     h1 {
       color: green;
     }
@@ -21,7 +26,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'change-detection-strategy';
   componentName: string = "Main Component"
-  testing: string = "this is a test string to send input data"
+  buttonText: string = "I'm a button, click me"
 
   ngOnInit() {
     console.log(`${this.componentName} ran ngOnInit`)
@@ -32,6 +37,7 @@ export class AppComponent implements OnInit {
   }
 
   onClick() {
-    console.log("onClick fired")
+    this.buttonText = "ARGH, I've been clicked!!!"
+    console.log(`${this.componentName} changed some data`)
   }
 }

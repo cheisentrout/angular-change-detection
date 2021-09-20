@@ -9,6 +9,11 @@ import { AppComponent } from '../app.component';
     <first-grandchild></first-grandchild>
   `,
   styles: [`
+    * {
+      font-family: 'roboto';
+      letter-spacing: .5px;
+    }
+
     h3 {
       color: purple;
     }
@@ -24,7 +29,6 @@ export class FirstChildComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(`${this.componentName} fired ngOnInit`)
-    console.log(`${this.appComponent.testing}`)
   }
 
   ngDoCheck(): void {

@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
     <second-grandchild></second-grandchild>
   `,
   styles: [`
+    * {
+      font-family: 'roboto';
+      letter-spacing: .5px;
+    }
+    
     h3 {
       color: blue;
     }
