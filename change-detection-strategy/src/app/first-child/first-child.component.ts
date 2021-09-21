@@ -4,7 +4,7 @@ import { Person } from '../person';
 
 @Component({
   selector: 'first-child',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>
       <h3>First Child</h3>
@@ -58,6 +58,11 @@ export class FirstChildComponent implements OnInit {
     console.log(`${this.componentName} fired ngOnInit`)
   }
 
+
+  /** Of note / to explore further:
+   * Adding detect Changes() to the DoCheck lifecycle hook DOES seem to force change detection
+   * past the OnPush method.
+   */
   ngDoCheck(): void {
     // this.cdr.detectChanges()
     console.log(`${this.componentName} ran change detection.`)

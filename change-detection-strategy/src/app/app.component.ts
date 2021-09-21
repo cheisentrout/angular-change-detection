@@ -85,7 +85,7 @@ export class AppComponent implements OnInit {
     `)
 
     // ** Uncomment to demo how OnPush won't render mutations to existing reference types:
-    //this.person.firstName = "Melody"
+    // this.person.firstName = "Melody"
 
     if (this.i >= peopleArray.length) {
       this.i = 0;
