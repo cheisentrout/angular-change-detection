@@ -4,7 +4,7 @@ import { Person } from '../person';
 
 @Component({
   selector: 'first-child',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>
       <h3>First Child</h3>
